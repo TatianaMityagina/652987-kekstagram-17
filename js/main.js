@@ -49,7 +49,7 @@ var createComment = function () {
 var generatePhotosArray = function (quantity) {
   var photos = [];
 
-  for (var i = 0; i <= quantity; i++) {
+  for (var i = 0; i < quantity; i++) {
     photos.push({
       url: 'photos/{{i}}.jpg'.replace('{{i}}', i + 1),
       likes: getRandomFromInterval(15, 200),
