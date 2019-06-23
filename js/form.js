@@ -28,25 +28,6 @@ var onDescriptionFocusout = function () {
   descriptionFieldFocus = false;
 };
 
-// При неправильном заполнении имени высвечивается сообщение след. вида
-descriptionField.addEventListener('invalid', function (evt) {
-  if (descriptionField.validity.tooLong) {
-    descriptionField.setCustomValidity('Комментарий не должен превышать 140 символов');
-  } else {
-    descriptionField.setCustomValidity('');
-  }
-});
-
-// Сбросить значение поля, если это значение стало корректно
-descriptionField.addEventListener('textarea', function (evt) {
-  var target = evt.target;
-  if (target.value.length > 140) {
-    target.setCustomValidity('Комментарий не должен превышать 140 символов');
-  } else {
-    target.setCustomValidity('');
-  }
-});
-
 // При открытии окна:
 var openPopup = function () {
   overlay.classList.remove('hidden'); // удаляем стили скрывающие окно
@@ -56,7 +37,6 @@ var openPopup = function () {
   imageUploadScale.style.visibility = 'visible'; // отображаем блок кнопок масштабирования
   slider.style.visibility = 'hidden'; // скрываем ползунок
   imageSize.value = '100%'; // изначально задаем 100% масштаб изображению
-
 };
 
 upload.addEventListener('change', function (evt) {
