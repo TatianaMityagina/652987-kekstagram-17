@@ -10,7 +10,7 @@
   var imagePreview = document.querySelector('.img-upload__preview'); // Предварительный просмотр фотографии
 
   // При выполнении событий данной функции изменяется фильтр фотографии
-  window.contentSlider = function (changeIntensityLevel) {
+  var initSlider = function () {
 
     // При нажатии на поле с фильтрами происходит следующее:
     effectsList.addEventListener('click', function (evt) {
@@ -28,7 +28,7 @@
       if (evt.target.classList.contains('effects__preview')) {
         imagePreview.classList = 'img-upload__preview';
         imagePreview.classList.add(evt.target.classList[1]); // Мы добавляем класс с эффектом в пердварительный просмотр
-        changeIntensityLevel(1); // А функции задаем значение интенсивности
+        window.changeIntensityLevel(1); // А функции задаем значение интенсивности
       }
     });
 
@@ -54,7 +54,7 @@
           sliderEffect.style.width = (sliderPin.offsetLeft) + 'px';
         }
 
-        changeIntensityLevel(sliderValue);
+        window.changeIntensityLevel(sliderValue);
       };
 
       // При отпускании кнопки мыши нужно переставать слушать события движения мыши
@@ -70,4 +70,5 @@
       document.addEventListener('mouseup', onMouseUp);
     });
   };
+  initSlider();
 })();

@@ -4,24 +4,26 @@
 
   var imagePreview = document.querySelector('.img-upload__preview'); // Предварительный просмотр фотографии
 
-  var changeIntensityLevel = function (intensityValue) {
-    if (imagePreview.classList.contains('effects__preview--chrome')) {
-      imagePreview.style.filter = 'grayscale(' + intensityValue + ')';
-    } else if (imagePreview.classList.contains('effects__preview--sepia')) {
-      imagePreview.style.filter = 'sepia(' + intensityValue + ')';
-    } else if (imagePreview.classList.contains('effects__preview--marvin')) {
-      imagePreview.style.filter = 'invert(' + (intensityValue * 100) + '%)';
-    } else if (imagePreview.classList.contains('effects__preview--phobos')) {
-      imagePreview.style.filter = 'blur(' + (intensityValue * 3) + 'px)';
-    } else if (imagePreview.classList.contains('effects__preview--heat')) {
-      imagePreview.style.filter = 'brightness(' + (1 + intensityValue * 3) + ')';
-    } else if (imagePreview.classList.contains('effects__preview--chrome')) {
-      imagePreview.style.filter = 'grayscale(' + intensityValue + ')';
-    } else if (imagePreview.classList.contains('effects__preview--none')) {
-      imagePreview.style.filter = '';
-    }
+  var changeIntensityLevel = function (intensityValue) { // Для изменения уровня интенсивности
+
+    var classToIntensity = { // Задаем переменную содержащую объект (виды фильтров)
+      'effects__preview--chrome': 'grayscale(' + intensityValue + ')',
+      'effects__preview--sepia': 'sepia(' + intensityValue + ')',
+      'effects__preview--marvin': 'invert(' + (intensityValue * 100) + '%)',
+      'effects__preview--phobos': 'blur(' + (intensityValue * 3) + 'px)',
+      'effects__preview--heat': 'brightness(' + (1 + intensityValue * 3) + ')',
+      'effects__preview--none': 'none'
+    };
+
+    imagePreview.classList.forEach(function (className) {
+      var result = classToIntensity[className];
+
+      if (result) {
+        imagePreview.style.filter = result;
+      }
+    });
   };
 
-  window.contentSlider(changeIntensityLevel);
+  window.changeIntensityLevel = changeIntensityLevel;
 
 })();
