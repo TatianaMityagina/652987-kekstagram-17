@@ -117,4 +117,16 @@
     }
   });
 
+  // Открытие большой версии изображения
+  picContainer.addEventListener('click', function (e) {
+
+    if (e.target.classList.contains('picture__img')) {
+      for (var i = 0; i < picturesInfo.length; i++) {
+        if (picturesInfo[i].url === e.target.attributes.src.nodeValue) {
+          window.showBigPicture(picturesInfo[i]);
+        }
+      }
+    }
+  });
+
 })();
