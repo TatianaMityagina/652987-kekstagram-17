@@ -37,9 +37,9 @@
   // Функция для удаления всех элементов из родителя
   var removePictures = function () {
     var picturesToRemove = picContainer.querySelectorAll('.picture');
-    for (var i = 0; i < picturesToRemove.length; i++) {
-      picContainer.removeChild(picturesToRemove[i]);
-    }
+    picturesToRemove.forEach(function (item) {
+      picContainer.removeChild(item);
+    });
   };
 
   var activateFilter = debounce(function (e) {
@@ -84,7 +84,6 @@
     node.style.left = 0;
     node.style.right = 0;
     node.style.fontSize = '20px';
-
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
   };
