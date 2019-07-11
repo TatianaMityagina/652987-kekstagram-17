@@ -11,11 +11,12 @@
   var imageSize = document.querySelector('.scale__control--value'); // Масштаб изображения
   var slider = document.querySelector('.effect-level'); // Ползунок изменения глубины эффекта, накладываемого на изображение
   var descriptionField = overlay.querySelector('.text__description');
+  var hashtagsField = document.querySelector('.text__hashtags');
   var descriptionFieldFocus = false;
 
   // При нажатии ESC форма редактирования изображения закроется
   var onPopupEscPress = function (evt) {
-    if (!descriptionFieldFocus && evt.keyCode === ESC_KEYCODE) {
+    if (!descriptionFieldFocus && evt.keyCode === ESC_KEYCODE && hashtagsField !== document.activeElement) {
       closePopup();
     }
   };
@@ -51,6 +52,7 @@
     document.removeEventListener('keydown', onPopupEscPress);
     descriptionField.removeEventListener('focus', onDescriptionFocus);
     descriptionField.removeEventListener('focusout', onDescriptionFocusout);
+    hashtagsField.value = '';
   };
 
   overlayClose.addEventListener('click', function () {
