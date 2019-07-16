@@ -6,8 +6,8 @@
   var MAX_VALUE = 100;
   var MIN_VALUE = 25;
 
-  var imageSize = document.querySelector('.scale__control--value'); // Масштаб изображения
-  var imagePreview = document.querySelector('.img-upload__preview'); // Предварительный просмотр фотографии
+  var imageSizeElement = document.querySelector('.scale__control--value'); // Масштаб изображения
+  var imagePreviewElement = document.querySelector('.img-upload__preview'); // Предварительный просмотр фотографии
   var zoomOutPhoto = document.querySelector('.scale__control--smaller'); // Кнопка уменьшения масштаба
   var zoomInPhoto = document.querySelector('.scale__control--bigger'); // Кнопка увеличения масштаба
   var scaleValue = 100;
@@ -31,14 +31,14 @@
 
   var onScaleSmallerClick = function () {
     scaleValue = moveDownScale(scaleValue);
-    imageSize.value = scaleValue + '%';
-    imagePreview.style = 'transform: scale(' + scaleValue / MAX_VALUE + ');';
+    imageSizeElement.value = scaleValue + '%';
+    imagePreviewElement.style = 'transform: scale(' + scaleValue / MAX_VALUE + ');';
   };
 
   var onScaleBiggerClick = function () {
     scaleValue = moveUpScale(scaleValue);
-    imageSize.value = scaleValue + '%';
-    imagePreview.style = 'transform: scale(' + scaleValue / MAX_VALUE + ');';
+    imageSizeElement.value = scaleValue + '%';
+    imagePreviewElement.style = 'transform: scale(' + scaleValue / MAX_VALUE + ');';
   };
 
   zoomOutPhoto.addEventListener('click', function () {

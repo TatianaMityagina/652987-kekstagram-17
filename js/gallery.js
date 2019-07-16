@@ -3,9 +3,9 @@
 (function () {
   var DATA_URL = 'https://js.dump.academy/kekstagram/data';
   var debounce = window.debounce;
-  var filtersForm = document.querySelector('.img-filters__form');
-  var imgFilters = document.querySelector('.img-filters');
-  var picContainer = document.querySelector('.pictures');
+  var filtersFormElemet = document.querySelector('.img-filters__form');
+  var imgFiltersElement = document.querySelector('.img-filters');
+  var picContainerElement = document.querySelector('.pictures');
   var picturesInfo = [];
 
   // Находим шаблон изображения случайного пользователя
@@ -36,9 +36,9 @@
 
   // Функция для удаления всех элементов из родителя
   var removePictures = function () {
-    var picturesToRemove = picContainer.querySelectorAll('.picture');
+    var picturesToRemove = picContainerElement.querySelectorAll('.picture');
     picturesToRemove.forEach(function (item) {
-      picContainer.removeChild(item);
+      picContainerElement.removeChild(item);
     });
   };
 
@@ -72,7 +72,7 @@
 
   var successHandler = function (array) {
     picturesInfo = array;
-    imgFilters.classList.remove('img-filters--inactive');
+    imgFiltersElement.classList.remove('img-filters--inactive');
     renderPictures(picturesInfo);
     return picturesInfo;
   };
@@ -96,7 +96,7 @@
 
   // Функция для смены класса на активном элементе и удаления предыдущей выборки фото
   var changeFilter = function (evt, jsonData) {
-    var imgFiltersButton = filtersForm.querySelectorAll('.img-filters__button');
+    var imgFiltersButton = filtersFormElemet.querySelectorAll('.img-filters__button');
     var result = idToFilter[evt.target.id];
 
     imgFiltersButton.forEach(function (it) {
@@ -110,21 +110,25 @@
 
   window.backend.load(DATA_URL, successHandler, errorHandler);
 
-  imgFilters.addEventListener('click', function (e) {
-    if (e.target.classList.contains('img-filters__button')) {
-      activateFilter(e);
+  imgFiltersElement.addEventListener('click', function (evt) {
+    if (evt.target.classList.contains('img-filters__button')) {
+      activateFilter(evt);
     }
   });
 
   // Открытие большой версии изображения
-  picContainer.addEventListener('click', function (e) {
 
-    if (e.target.classList.contains('picture__img')) {
-      for (var i = 0; i < picturesInfo.length; i++) {
-        if (picturesInfo[i].url === e.target.attributes.src.nodeValue) {
-          window.showBigPicture(picturesInfo[i]);
-        }
-      }
+  var getPicture = function (node) {
+    return picturesInfo.find(function (picture) {
+      return picture.url === node.attributes.src.nodeValue;
+    });
+  };
+
+  picContainerElement.addEventListener('click', function (evt) {
+
+    if (evt.target.classList.contains('picture__img')) {
+      var picture = getPicture(evt.target);
+      window.showBigPicture(picture);
     }
   });
 

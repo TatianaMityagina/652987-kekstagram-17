@@ -4,19 +4,19 @@
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
 
-  var upload = document.querySelector(' #upload-file');
-  var overlay = document.querySelector('.img-upload__overlay');
-  var overlayClose = overlay.querySelector('.img-upload__cancel');
-  var imageUploadScale = document.querySelector('.img-upload__scale'); // Блок кнопок изменения масштаба
-  var imageSize = document.querySelector('.scale__control--value'); // Масштаб изображения
-  var slider = document.querySelector('.effect-level'); // Ползунок изменения глубины эффекта, накладываемого на изображение
-  var descriptionField = overlay.querySelector('.text__description');
-  var hashtagsField = document.querySelector('.text__hashtags');
+  var uploadBtnElement = document.querySelector(' #upload-file');
+  var uploadOverlayElement = document.querySelector('.img-upload__overlay');
+  var overlayClose = uploadOverlayElement.querySelector('.img-upload__cancel');
+  var imageUploadScaleElement = document.querySelector('.img-upload__scale'); // Блок кнопок изменения масштаба
+  var imageSizeValueElement = document.querySelector('.scale__control--value'); // Масштаб изображения
+  var sliderElement = document.querySelector('.effect-level'); // Ползунок изменения глубины эффекта, накладываемого на изображение
+  var descriptionFieldElement = uploadOverlayElement.querySelector('.text__description');
+  var hashtagsFieldElement = document.querySelector('.text__hashtags');
   var descriptionFieldFocus = false;
 
   // При нажатии ESC форма редактирования изображения закроется
   var onPopupEscPress = function (evt) {
-    if (!descriptionFieldFocus && evt.keyCode === ESC_KEYCODE && hashtagsField !== document.activeElement) {
+    if (!descriptionFieldFocus && evt.keyCode === ESC_KEYCODE && hashtagsFieldElement !== document.activeElement) {
       closePopup();
     }
   };
@@ -33,26 +33,26 @@
 
   // При открытии окна:
   var openPopup = function () {
-    overlay.classList.remove('hidden'); // удаляем стили скрывающие окно
+    uploadOverlayElement.classList.remove('hidden'); // удаляем стили скрывающие окно
     document.addEventListener('keydown', onPopupEscPress); // отлавливаем событие при ктором окно закроется
-    descriptionField.addEventListener('focus', onDescriptionFocus);
-    descriptionField.addEventListener('focusout', onDescriptionFocusout);
-    imageUploadScale.style.visibility = 'visible'; // отображаем блок кнопок масштабирования
-    slider.style.visibility = 'hidden'; // скрываем ползунок
-    imageSize.value = '100%'; // изначально задаем 100% масштаб изображению
+    descriptionFieldElement.addEventListener('focus', onDescriptionFocus);
+    descriptionFieldElement.addEventListener('focusout', onDescriptionFocusout);
+    imageUploadScaleElement.style.visibility = 'visible'; // отображаем блок кнопок масштабирования
+    sliderElement.style.visibility = 'hidden'; // скрываем ползунок
+    imageSizeValueElement .value = '100%'; // изначально задаем 100% масштаб изображению
   };
 
-  upload.addEventListener('change', function (evt) {
+  uploadBtnElement.addEventListener('change', function (evt) {
     evt.preventDefault();
     openPopup();
   });
 
   var closePopup = function () {
-    overlay.classList.add('hidden');
+    uploadOverlayElement.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
-    descriptionField.removeEventListener('focus', onDescriptionFocus);
-    descriptionField.removeEventListener('focusout', onDescriptionFocusout);
-    hashtagsField.value = '';
+    descriptionFieldElement.removeEventListener('focus', onDescriptionFocus);
+    descriptionFieldElement.removeEventListener('focusout', onDescriptionFocusout);
+    hashtagsFieldElement.value = '';
   };
 
   overlayClose.addEventListener('click', function () {
@@ -64,6 +64,7 @@
       closePopup();
     }
   });
+  window.closePopup = closePopup;
 })();
 
 

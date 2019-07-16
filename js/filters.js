@@ -2,7 +2,7 @@
 
 (function () {
 
-  var imagePreview = document.querySelector('.img-upload__preview'); // Предварительный просмотр фотографии
+  var imageUploadPreviewElement = document.querySelector('.img-upload__preview'); // Предварительный просмотр фотографии
 
   var changeIntensityLevel = function (intensityValue) { // Для изменения уровня интенсивности
 
@@ -15,11 +15,11 @@
       'effects__preview--none': 'none'
     };
 
-    imagePreview.classList.forEach(function (className) {
+    imageUploadPreviewElement.classList.forEach(function (className) {
       var result = classToIntensity[className];
 
       if (result) {
-        imagePreview.style.filter = result;
+        imageUploadPreviewElement.style.filter = result;
       }
     });
   };
