@@ -3,10 +3,13 @@
 (function () {
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
   var uploadBtnElement = document.querySelector(' #upload-file');
   var uploadOverlayElement = document.querySelector('.img-upload__overlay');
   var overlayClose = uploadOverlayElement.querySelector('.img-upload__cancel');
+  var effectsPreviewElement = document.querySelectorAll('.effects__preview');
+  var imageInPreviewElement = document.querySelector('.img-upload__preview img');
   var imageUploadScaleElement = document.querySelector('.img-upload__scale'); // Блок кнопок изменения масштаба
   var imageSizeValueElement = document.querySelector('.scale__control--value'); // Масштаб изображения
   var sliderElement = document.querySelector('.effect-level'); // Ползунок изменения глубины эффекта, накладываемого на изображение
@@ -44,7 +47,25 @@
 
   uploadBtnElement.addEventListener('change', function (evt) {
     evt.preventDefault();
-    openPopup();
+    var file = uploadBtnElement.files[0];
+    var fileName = file.name.toLowerCase();
+    var matches = FILE_TYPES.some(function (it) {
+      return fileName.endsWith(it);
+    });
+
+    if (matches) {
+      var reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        imageInPreviewElement.src = reader.result;
+        effectsPreviewElement.forEach(function (item) {
+          item.style.backgroundImage = 'url(' + reader.result + ')';
+        });
+        openPopup();
+      });
+
+      reader.readAsDataURL(file);
+    }
   });
 
   var closePopup = function () {
