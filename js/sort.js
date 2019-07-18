@@ -2,7 +2,7 @@
 
 (function () {
 
-  var filtersForm = document.querySelector('.img-filters__form');
+  var filtersFormElement = document.querySelector('.img-filters__form');
 
   var filterPopular = function (enterData) {
     return enterData;
@@ -32,7 +32,7 @@
   };
 
   var changeFilter = function (evt, jsonData) {
-    var imgFiltersButton = filtersForm.querySelectorAll('.img-filters__button');
+    var imgFiltersButton = filtersFormElement.querySelectorAll('.img-filters__button');
     var result = idToFilter[evt.target.id];
 
     imgFiltersButton.forEach(imgFiltersButton, function (it) {
