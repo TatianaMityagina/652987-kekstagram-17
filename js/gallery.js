@@ -42,7 +42,7 @@
     });
   };
 
-  var activateFilter = debounce(function (e) {
+  var setActiveButton = debounce(function (e) {
     removePictures();
     renderPictures(changeFilter(e, picturesInfo));
   });
@@ -110,25 +110,21 @@
 
   window.backend.load(DATA_URL, successHandler, errorHandler);
 
-  imgFiltersElement.addEventListener('click', function (evt) {
-    if (evt.target.classList.contains('img-filters__button')) {
-      activateFilter(evt);
+  imgFiltersElement.addEventListener('click', function (e) {
+    if (e.target.classList.contains('img-filters__button')) {
+      setActiveButton(e);
     }
   });
 
   // Открытие большой версии изображения
+  picContainerElement.addEventListener('click', function (e) {
 
-  var getPicture = function (node) {
-    return picturesInfo.find(function (picture) {
-      return picture.url === node.attributes.src.nodeValue;
-    });
-  };
-
-  picContainerElement.addEventListener('click', function (evt) {
-
-    if (evt.target.classList.contains('picture__img')) {
-      var picture = getPicture(evt.target);
-      window.showBigPicture(picture);
+    if (e.target.classList.contains('picture__img')) {
+      for (var i = 0; i < picturesInfo.length; i++) {
+        if (picturesInfo[i].url === e.target.attributes.src.nodeValue) {
+          window.showBigPicture(picturesInfo[i]);
+        }
+      }
     }
   });
 

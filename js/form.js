@@ -8,6 +8,7 @@
   var uploadBtnElement = document.querySelector(' #upload-file');
   var uploadOverlayElement = document.querySelector('.img-upload__overlay');
   var overlayClose = uploadOverlayElement.querySelector('.img-upload__cancel');
+  var imagePreviewElement = document.querySelector('.img-upload__preview');
   var effectsPreviewElement = document.querySelectorAll('.effects__preview');
   var imageInPreviewElement = document.querySelector('.img-upload__preview img');
   var imageUploadScaleElement = document.querySelector('.img-upload__scale'); // Блок кнопок изменения масштаба
@@ -43,6 +44,9 @@
     imageUploadScaleElement.style.visibility = 'visible'; // отображаем блок кнопок масштабирования
     sliderElement.style.visibility = 'hidden'; // скрываем ползунок
     imageSizeValueElement .value = '100%'; // изначально задаем 100% масштаб изображению
+    imagePreviewElement.style.transform = null; // Масштаб изображения при открытии
+    imagePreviewElement.style.filter = null; // Убираю style filter:  из блока по нему задается фильтр
+    imagePreviewElement.className = 'img-upload__preview'; // Просто переназначаю все стили на один при открытии окна
   };
 
   uploadBtnElement.addEventListener('change', function (evt) {
@@ -74,6 +78,8 @@
     descriptionFieldElement.removeEventListener('focus', onDescriptionFocus);
     descriptionFieldElement.removeEventListener('focusout', onDescriptionFocusout);
     hashtagsFieldElement.value = '';
+    descriptionFieldElement.value = '';
+    document.getElementById('upload-select-image').reset();
   };
 
   overlayClose.addEventListener('click', function () {
