@@ -1,9 +1,8 @@
 'use strict';
 
 (function () {
-  var DATA_URL = 'https://js.dump.academy/kekstagram/data';
   var debounce = window.debounce;
-  var filtersFormElemet = document.querySelector('.img-filters__form');
+  var filtersFormElement = document.querySelector('.img-filters__form');
   var imgFiltersElement = document.querySelector('.img-filters');
   var picContainerElement = document.querySelector('.pictures');
   var picturesInfo = [];
@@ -96,7 +95,7 @@
 
   // Функция для смены класса на активном элементе и удаления предыдущей выборки фото
   var changeFilter = function (evt, jsonData) {
-    var imgFiltersButton = filtersFormElemet.querySelectorAll('.img-filters__button');
+    var imgFiltersButton = filtersFormElement.querySelectorAll('.img-filters__button');
     var result = idToFilter[evt.target.id];
 
     imgFiltersButton.forEach(function (it) {
@@ -108,7 +107,7 @@
     return result(jsonData);
   };
 
-  window.backend.load(DATA_URL, successHandler, errorHandler);
+  window.backend.load(successHandler, errorHandler);
 
   imgFiltersElement.addEventListener('click', function (e) {
     if (e.target.classList.contains('img-filters__button')) {

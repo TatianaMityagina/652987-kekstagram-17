@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  var ESC_KEYCODE = 27;
-  var ENTER_KEYCODE = 13;
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
   var uploadBtnElement = document.querySelector(' #upload-file');
@@ -20,8 +18,10 @@
 
   // При нажатии ESC форма редактирования изображения закроется
   var onPopupEscPress = function (evt) {
-    if (!descriptionFieldFocus && evt.keyCode === ESC_KEYCODE && hashtagsFieldElement !== document.activeElement) {
-      closePopup();
+    if (!descriptionFieldFocus && hashtagsFieldElement !== document.activeElement) {
+      window.util.isEscEvent(evt, function () {
+        closePopup();
+      });
     }
   };
 
@@ -87,9 +87,9 @@
   });
 
   overlayClose.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
+    window.util.isEnterEvent(evt, function () {
       closePopup();
-    }
+    });
   });
   window.closePopup = closePopup;
 })();

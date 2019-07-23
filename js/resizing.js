@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var ENTER_KEYCODE = 13;
   var SIZE_STEP = 25;
   var MAX_VALUE = 100;
   var MIN_VALUE = 25;
@@ -46,9 +45,7 @@
   });
 
   zoomOutPhoto.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
-      onScaleSmallerClick();
-    }
+    window.util.isEnterEvent(evt, onScaleSmallerClick);
   });
 
   zoomInPhoto.addEventListener('click', function () {
@@ -56,8 +53,6 @@
   });
 
   zoomInPhoto.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
-      onScaleBiggerClick();
-    }
+    window.util.isEnterEvent(evt, onScaleBiggerClick);
   });
 })();
