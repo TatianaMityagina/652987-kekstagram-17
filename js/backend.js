@@ -1,9 +1,9 @@
 'use strict';
 
-var URL_GET = 'https://js.dump.academy/kekstagram/data';
-var URL_POST = 'https://js.dump.academy/kekstagram';
-
 window.backend = (function () {
+  var URL_GET = 'https://js.dump.academy/kekstagram/data';
+  var URL_POST = 'https://js.dump.academy/kekstagram';
+
   var load = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
