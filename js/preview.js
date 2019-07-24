@@ -1,10 +1,6 @@
 'use strict';
 
 (function () {
-
-  var ENTER_KEYCODE = 13;
-  var ESC_KEYCODE = 27;
-
   var cancelBigPicture = document.querySelector('.big-picture__cancel');
   var bigPictureElement = document.querySelector('.big-picture');
   var body = document.querySelector('body');
@@ -14,9 +10,9 @@
   var hideCommentsInfo = window.hideCommentsInfo;
 
   var onBigPictureEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    window.util.isEscEvent(evt, function () {
       closeBigPicture();
-    }
+    });
   };
 
   window.showBigPicture = function (pictureData) {
@@ -51,9 +47,9 @@
   });
 
   cancelBigPicture.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
+    window.util.isEnterEvent(evt, function () {
       closeBigPicture();
-    }
+    });
   });
 
 })();

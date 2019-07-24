@@ -1,11 +1,6 @@
 'use strict';
 
 (function () {
-
-  var ENTER_KEYCODE = 13;
-  var ESC_KEYCODE = 27;
-  var URL_POST = 'https://js.dump.academy/kekstagram';
-
   var bodyElement = document.querySelector('body');
   var successTypeMessageElement = document.querySelector('#success');
   var errorTypeMessageElement = document.querySelector('#error');
@@ -54,9 +49,9 @@
   };
 
   var onMessageEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    window.util.isEscEvent(evt, function () {
       closePopupMessage();
-    }
+    });
   };
 
   var openSuccessPopup = function () {
@@ -72,9 +67,9 @@
   };
 
   successButtonElement.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
+    window.util.isEnterEvent(evt, function () {
       closePopupMessage();
-    }
+    });
   });
 
   successButtonElement.addEventListener('click', function (evt) {
@@ -87,21 +82,21 @@
 
     if (evt.target.textContent === 'Попробовать снова') {
       closePopupMessage();
-      backend.save(URL_POST, new FormData(formElement), sendSuccessHandler, sendErrorHandler);
+      backend.save(new FormData(formElement), sendSuccessHandler, sendErrorHandler);
     } else {
       closePopupMessage();
     }
   });
 
   errorButtonsBlockElement.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
+    window.util.isEnterEvent(evt, function () {
       if (evt.target.textContent === 'Попробовать снова') {
         closePopupMessage();
-        backend.save(URL_POST, new FormData(formElement), sendSuccessHandler, sendErrorHandler);
+        backend.save(new FormData(formElement), sendSuccessHandler, sendErrorHandler);
       } else {
         closePopupMessage();
       }
-    }
+    });
   });
 
   // Отправка формы
@@ -120,7 +115,7 @@
   formElement.addEventListener('submit', function (evt) {
     evt.preventDefault();
     if (!hashtagFieldElement.validationMessage) {
-      backend.save(URL_POST, new FormData(formElement), sendSuccessHandler, sendErrorHandler);
+      backend.save(new FormData(formElement), sendSuccessHandler, sendErrorHandler);
       closePopup();
     }
   });
